@@ -1,6 +1,5 @@
 # PROJET BDD : neo4j ecommerce recommendation system 
 ## the next section contains basic queries of neo4j
-
 - ### `To create a node:`
 ```sql
 CREATE (n:Label {properties})

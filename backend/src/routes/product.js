@@ -8,7 +8,7 @@ product_router.get("/", async (req, res) => {
 
 product_router.get("/hello", (req, res) => {
   res.send("hello world this is a quick test");
-})
+});
 
 product_router.get("/:id", async (req, res) => {
   const product = await Product.getOne(req.params.id);
