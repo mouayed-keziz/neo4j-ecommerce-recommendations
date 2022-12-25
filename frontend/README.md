@@ -13,7 +13,7 @@ The frontend code is structured as follows:
 - `src/:` This folder contains the source code for the frontend application.
 components/: This folder contains reusable React components that make up the user interface.
 - `pages/:` This folder contains the top-level pages of the application. Each page is a React component that is rendered when the corresponding route is visited.
-- `utils/:` This folder contains utility functions that are used throughout the frontend code.
+- `context/:` This folder contains utility functions that are used throughout the frontend code.
 ## Deployment
 To build the frontend for production:
 
