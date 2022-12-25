@@ -1,7 +1,7 @@
 # Product Recommendation Web Application
 
 A web application that allows users to browse and purchase products and provides product recommendations based on user preferences.
-
+	
 ## Features
 
 - Browse products by category and view product details
@@ -11,6 +11,7 @@ A web application that allows users to browse and purchase products and provides
 - Receive product recommendations based on user preferences
 
 ## Technologies
+
 
 - React for the frontend
 - Express for the backend

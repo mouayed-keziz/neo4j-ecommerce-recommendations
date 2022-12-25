@@ -40,7 +40,7 @@ class Product {
   static async delete(id) {
     const query = `MATCH (n:Product) WHERE n.id = '${id}' DELETE n`;
     const result = await RunQuery(query);
-    return `Delete operation for product ${id} ended successfully`;
+    return `Delete operation successfully`;
   }
 }
 

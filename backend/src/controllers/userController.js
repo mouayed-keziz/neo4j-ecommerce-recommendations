@@ -27,8 +27,11 @@ const register_user = async (req, res) => {
 
 const get_all_users = async (req, res) => {
 	try {
-		const users = await User.getAll().then;
-		res.send(users.map((user) => user.properties));
+		const users = await User.getAll().then((users) => {
+			res.send(users.map((user) => user.properties));
+		}).catch((error) => {
+			res.status(500).send(error.message);
+		});
 	} catch (error) {
 		res.status(500).send(error.message);
 	}
@@ -36,8 +39,11 @@ const get_all_users = async (req, res) => {
 
 const get_one_user = async (req, res) => {
 	try {
-		const user = await User.getOne(req.params.id);
-		res.send(user.properties);
+		const user = await User.getOne(req.params.id).then((user) => {
+			res.send(user.properties);
+		}).catch((error) => {
+			res.status(500).send("user not found");
+		});
 	} catch (error) {
 		res.status(500).send(error.message);
 	}
@@ -63,11 +69,26 @@ const delete_user = async (req, res) => {
 	}
 };
 
+const add_to_cart = async (req, res) => {
+	const { userId, productId, quantity } = req.body;
+	try {
+		User.addToCart(userId, productId, quantity).then((result) => {
+			res.send(result);
+		}).catch((error) => {
+			res.status(500).send(error.message);
+		});
+
+	} catch (error) {
+		res.send(error.message);
+	}
+};
+
 module.exports = {
 	login_user,
 	register_user,
 	get_all_users,
 	get_one_user,
 	update_user,
-	delete_user
+	delete_user,
+	add_to_cart
 };

@@ -22,7 +22,7 @@ const get_product_by_id = async (req, res) => {
 
 const create_product = async (req, res) => {
   try {
-    ["name", "price", "description", "categories"].forEach((item) => {
+    ["name", "price", "description", "category"].forEach((item) => {
       if (!req.body[item]) {
         throw new Error(`${item} is required`);
       }

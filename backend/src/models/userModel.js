@@ -18,6 +18,12 @@ class User {
 		await RunQuery(createQuery);
 	}
 
+	static async addToCart(userId, productId, quantity) {
+		const query = `MATCH (u:User), (p:Product) WHERE u.id = '${userId}' AND p.id = '${productId}' CREATE (u)-[r:HAS_IN_CART {quantity: ${quantity}}]->(p) RETURN r`;
+		const result = await RunQuery(query);
+		return result.records[0].get("r");
+	}
+
 	static async getAll() {
 		const query = `MATCH (n:User) RETURN n`;
 		const result = await RunQuery(query);
@@ -27,6 +33,7 @@ class User {
 	static async getOne(id) {
 		const query = `MATCH (n:User) WHERE n.id = '${id}' RETURN n`;
 		const result = await RunQuery(query);
+		if (result.records.length === 0) return null;
 		return result.records[0].get("n");
 	}
 
