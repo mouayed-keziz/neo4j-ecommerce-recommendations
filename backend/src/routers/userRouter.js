@@ -1,0 +1,24 @@
+
+
+const express = require("express");
+const user_router = express.Router();
+const {
+	login_user,
+	register_user,
+	get_all_users,
+	get_one_user,
+	update_user,
+	delete_user
+} = require("../controllers/userController");
+
+
+user_router.post("/login", login_user,);
+user_router.post("/register", register_user,);
+user_router.get("/", get_all_users,);
+user_router.get("/:id", get_one_user,);
+user_router.patch("/:id", update_user,);
+user_router.delete("/:id", delete_user
+);
+
+
+module.exports = user_router;

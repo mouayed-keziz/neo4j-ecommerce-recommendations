@@ -12,10 +12,7 @@ let driver = null;
 let session = null;
 
 async function openSession() {
-  driver = _driver(
-    neo4jUrl,
-    auth.basic(neo4jUsername, neo4jPassword)
-  );
+  driver = _driver(neo4jUrl, auth.basic(neo4jUsername, neo4jPassword));
   session = driver.session({ database: "neo4j" });
 }
 async function closeSession() {
@@ -43,4 +40,3 @@ async function RunQuery(query) {
 }
 
 module.exports = { openSession, closeSession, RunQuery };
-

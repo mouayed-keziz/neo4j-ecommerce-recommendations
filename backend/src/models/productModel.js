@@ -16,19 +16,22 @@ class Product {
   static async getOne(id) {
     const query = `MATCH (n:Product) WHERE n.id = '${id}' RETURN n`;
     const result = await RunQuery(query);
-    return result.records[0].get('n');
+    return result.records[0].get("n");
   }
 
   static async getAll() {
     const query = `MATCH (n:Product) RETURN n`;
     const result = await RunQuery(query);
-    return result.records.map((record) => record.get('n'));
+    return result.records.map((record) => record.get("n"));
   }
 
   static async update(id, name, price, description, category) {
     const query = `
       MATCH (n:Product) WHERE n.id = '${id}'
-      SET ${Object.entries({ name, price, description, category }).filter(([, value]) => value).map(([key, value]) => `n.${key} = '${value}'`).join(', ')}
+      SET ${Object.entries({ name, price, description, category })
+        .filter(([, value]) => value)
+        .map(([key, value]) => `n.${key} = '${value}'`)
+        .join(", ")}
       RETURN n
     `;
     await RunQuery(query);
@@ -37,9 +40,8 @@ class Product {
   static async delete(id) {
     const query = `MATCH (n:Product) WHERE n.id = '${id}' DELETE n`;
     const result = await RunQuery(query);
-    return `Delete operation for product ${id} ended successfully`
+    return `Delete operation for product ${id} ended successfully`;
   }
 }
 
 module.exports = Product;
-
