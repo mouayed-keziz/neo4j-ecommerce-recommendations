@@ -1,13 +1,20 @@
 const auth = require("neo4j-driver").auth;
 const _driver = require("neo4j-driver").driver;
+const { config } = require("dotenv");
+
+config();
+
+const neo4jUrl = process.env.NEO4J_URL;
+const neo4jUsername = process.env.NEO4J_USERNAME;
+const neo4jPassword = process.env.NEO4J_PASSWORD;
 
 let driver = null;
 let session = null;
 
 async function openSession() {
   driver = _driver(
-    "bolt://184.72.179.204:7687",
-    auth.basic("neo4j", "seeds-saturday-surrenders")
+    neo4jUrl,
+    auth.basic(neo4jUsername, neo4jPassword)
   );
   session = driver.session({ database: "neo4j" });
 }

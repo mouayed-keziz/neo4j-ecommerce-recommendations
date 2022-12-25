@@ -2,7 +2,7 @@ const express = require("express");
 const { config } = require("dotenv");
 
 const product_router = require("../src/routes/product");
-const { RunQuery2, runQuery } = require("./db_connect");
+const { RunQuery } = require("./db_connect");
 
 config();
 const app = express();
@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 
 app.post("/query", async (req, res) => {
 	const query = req.body.query;
-	await runQuery(query).then((data) => {
+	await RunQuery(query).then((data) => {
 		const result = data.records.map((record) => record.get("p"));
 		res.send(result);
 	}).catch((err) => {
