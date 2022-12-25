@@ -26,13 +26,18 @@ class Product {
   }
 
   static async update(id, name, price, description, category) {
-    const query = `MATCH (n:Product) WHERE n.id = '${id}' SET n.name = '${name}', n.price = ${price}, n.description = '${description}', n.category = '${category}' RETURN n`;
+    const query = `
+      MATCH (n:Product) WHERE n.id = '${id}'
+      SET ${Object.entries({ name, price, description, category }).filter(([, value]) => value).map(([key, value]) => `n.${key} = '${value}'`).join(', ')}
+      RETURN n
+    `;
     await RunQuery(query);
   }
 
   static async delete(id) {
     const query = `MATCH (n:Product) WHERE n.id = '${id}' DELETE n`;
-    await RunQuery(query);
+    const result = await RunQuery(query);
+    return `Delete operation for product ${id} ended successfully`
   }
 }
 
