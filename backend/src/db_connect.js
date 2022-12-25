@@ -44,12 +44,3 @@ async function RunQuery(query) {
 
 module.exports = { openSession, closeSession, RunQuery };
 
-
-
-// --------------------------------------------
-//
-// runQuery(`MATCH (n) RETURN n LIMIT 25`).then((data) => {
-//   const properties = data.map((node) => node.properties);
-//   console.table(properties);
-// }
-// );
