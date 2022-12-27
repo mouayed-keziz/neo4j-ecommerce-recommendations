@@ -1,63 +1,31 @@
 const { RunQuery } = require("../db_connect");
-/*
-class Order {
-	constructor() {
-		this.table = "orders";
-	}
-
-	async createOrder(order) {
-		const query = `INSERT INTO ${this.table} (user_id, order_date, total_price, order_status) VALUES ($1, $2, $3, $4) RETURNING *`;
-		const values = [
-			order.user_id,
-			order.order_date,
-			order.total_price,
-			order.order_status
-		];
-		const result = await RunQuery(query, values);
-		return result;
-	}
-
-	async getOrders() {
-		const query = `SELECT * FROM ${this.table}`;
-		const result = await RunQuery(query);
-		return result;
-	}
-
-	async getOrderById(id) {
-		const query = `SELECT * FROM ${this.table} WHERE id = $1`;
-		const result = await RunQuery(query, [id]);
-		return result;
-	}
-}
-*/
-
 
 class Order {
-	constructor(userId, items) {
+	constructor(userId) {
 		this.userId = userId;
-		this.items = items;
-		this.date = new Date().toISOString();
 	}
 
 	async save() {
-		const query = `
-			MATCH (u:User) WHERE u.id = '${this.userId}'
-			CREATE (n:Order {id: apoc.create.uuid(), date: '${this.date}'}),
-				(u)-[:PLACED_ORDER]->(n)
-			RETURN n
-		`;
-		const result = await RunQuery(query);
-		const order = result.records[0].get("n");
+		const query1 = `
+		MATCH (u:User {id: '${this.userId}'})-[r:HAS_IN_CART]->(p:Product)
+		WITH collect(p) as products, u
+		CREATE (o:Order {id: apoc.create.uuid(), date: datetime()})
+		CREATE (u)-[:PLACED_ORDER]->(o)
+		FOREACH (product IN products | CREATE (o)-[:INCLUDES]->(product))
+		RETURN o`;
+		const query2 = `
+		MATCH (u:User {id: '${this.userId}'})-[r:HAS_IN_CART]->(p:Product)
+		DELETE r`;
 
-		for (const item of this.items) {
-			const { id, quantity } = item;
-			const createItemQuery = `
-				MATCH (p:Product) WHERE p.id = '${id}'
-				MATCH (o:Order) WHERE o.id = '${order.identity.low}'
-				CREATE (p)-[:INCLUDED_IN {quantity: ${quantity}}]->(o)
-			`;
-			await RunQuery(createItemQuery);
-		}
+		const result1 = await RunQuery(query1).then(async (result) => {
+			const result2 = await RunQuery(query2).then((result) => {
+				return result;
+			}).catch((err) => {
+				return err;
+			});
+		}).catch((err) => {
+			return err;
+		});
 	}
 
 	static async getAll() {
@@ -90,3 +58,19 @@ class Order {
 }
 
 module.exports = Order;
+
+
+
+
+
+
+
+// MATCH (u:User {id: '153651b0-0cd4-40a4-9c29-e03ab7320c8b'})-[r:HAS_IN_CART]->(p:Product)
+// WITH collect(p) as products, u
+// CREATE (o:Order {id: apoc.create.uuid(), date: datetime()})
+// CREATE (u)-[:PLACED_ORDER]->(o)
+// FOREACH (product IN products | CREATE (o)-[:INCLUDES]->(product))
+// RETURN o
+
+// MATCH (u:User {id: '153651b0-0cd4-40a4-9c29-e03ab7320c8b'})-[r:HAS_IN_CART]->(p:Product)
+// DELETE r

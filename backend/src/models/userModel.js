@@ -24,6 +24,16 @@ class User {
 		return result.records[0].get("r");
 	}
 
+	static async get_products_incart(userId) {
+		const query = `MATCH (u:User)-[r:HAS_IN_CART]->(p:Product) WHERE u.id = '${userId}' RETURN p, r`;
+		const result = await RunQuery(query);
+		return result.records.map((record) => {
+			const product = record.get("p");
+			product.quantity = record.get("r").properties.quantity;
+			return product;
+		});
+	}
+
 	static async getAll() {
 		const query = `MATCH (n:User) RETURN n`;
 		const result = await RunQuery(query);
@@ -62,6 +72,18 @@ class User {
 		const query = `MATCH (n:User) WHERE n.id = '${id}' DELETE n`;
 		const result = await RunQuery(query);
 		return `Delete operation for user ${id} ended successfully`;
+	}
+
+	static async get_products_incart(userId) {
+		const query = `MATCH (u:User)-[r:HAS_IN_CART]->(p:Product) WHERE u.id = '${userId}' RETURN p`;
+		const result = await RunQuery(query);
+		return result.records.map((record) => record.get("p"));
+	}
+
+	static async delete_cart(userId) {
+		const query = `MATCH (u:User)-[r:HAS_IN_CART]->(p:Product) WHERE u.id = '${userId}' DELETE r`;
+		const result = await RunQuery(query);
+		return result.records.map((record) => record.get("p"));
 	}
 }
 

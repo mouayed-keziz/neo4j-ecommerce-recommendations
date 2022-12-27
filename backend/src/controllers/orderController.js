@@ -1,5 +1,5 @@
 const Order = require("../models/orderModel");
-
+const User = require("../models/userModel");
 
 const get_all_orders = async (req, res) => {
 	Order.getAll()
@@ -22,7 +22,13 @@ const get_order_by_id = async (req, res) => {
 }
 
 const create_order = async (req, res) => {
-	// we did not defien the order model yet so we will do it later 
+	const { userId } = req.body;
+	const order = new Order(userId);
+	order.save(userId).then((result) => {
+		res.send(result);
+	}).catch((error) => {
+		res.status(500).send({ message: "Error creating order" });
+	});
 }
 
 module.exports = {

@@ -10,9 +10,10 @@ const order_router = require("express").Router();
 
 order_router.get("/", get_all_orders);
 
+order_router.post("/checkout", create_order);
+
 order_router.get("/:id", get_order_by_id);
 
-order_router.post("/", create_order);
 
 
 module.exports = order_router;
