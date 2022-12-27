@@ -31,8 +31,18 @@ const create_order = async (req, res) => {
 	});
 }
 
+const rate_product = async (req, res) => {
+	const { userId, productId, rating } = req.body;
+	Order.rate(userId, productId, rating).then((result) => {
+		res.send(result);
+	}).catch((error) => {
+		res.status(500).send({ message: "Error rating product" });
+	});
+}
+
 module.exports = {
 	get_all_orders,
 	get_order_by_id,
-	create_order
+	create_order,
+	rate_product
 }

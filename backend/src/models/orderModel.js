@@ -55,6 +55,15 @@ class Order {
 		const result = await RunQuery(query);
 		return `Delete operation for order ${id} ended successfully`;
 	}
+
+	static async rate(userId, productId, rating) {
+		const query = `
+		MATCH (u:User {id: '${userId}'})-[:PLACED_ORDER]->(o:Order)-[r:INCLUDES]->(p:Product {id: '${productId}'})
+		SET r.rating = ${rating}
+		RETURN r`;
+		const result = await RunQuery(query);
+		return result.records[0].get("r");
+	}
 }
 
 module.exports = Order;
