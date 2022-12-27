@@ -40,9 +40,23 @@ const rate_product = async (req, res) => {
 	});
 }
 
+const gen_recommendations = async (req, res) => {
+	try {
+		const userId = req.body.userId;
+		Order.generateRecommendations(userId).then((result) => {
+			res.send(result);
+		}).catch((error) => {
+			res.status(500).send({ message: "Error generating recommendations" });
+		});
+	} catch (error) {
+		res.status(500).send(error.message);
+	}
+}
+
 module.exports = {
 	get_all_orders,
 	get_order_by_id,
 	create_order,
-	rate_product
+	rate_product,
+	gen_recommendations
 }

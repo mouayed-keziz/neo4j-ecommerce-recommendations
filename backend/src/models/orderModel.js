@@ -64,6 +64,46 @@ class Order {
 		const result = await RunQuery(query);
 		return result.records[0].get("r");
 	}
+
+	static async generateRecommendations(userId) {
+		try {
+			// Find the user's purchased products
+			const purchasedProductsResult = await RunQuery(
+				`MATCH (u:User { id: '${userId}' })-[:PLACED_ORDER]->(o:Order)-[:INCLUDES]->(p:Product)
+			 RETURN p.id AS productId`
+			).then(async (result) => {
+				if (result.records.length === 0) return [];
+				const purchasedProductIds = purchasedProductsResult.records.map(record => record.get("productId"));
+
+				// Find other users who have purchased the same products
+				const similarUsersResult = await RunQuery(
+					`MATCH (u:User)-[:PLACED_ORDER]->(o:Order)-[:INCLUDES]->(p:Product)
+			 WHERE p.id IN '${purchasedProductIds}' AND u.id <> '${userId}'
+			 WITH u, COUNT(p) AS numMatchingPurchases
+			 ORDER BY numMatchingPurchases DESC
+			 LIMIT 5
+			 MATCH (u)-[:PLACED_ORDER]->(o:Order)-[:INCLUDES]->(p:Product)
+			 WHERE NOT p.id IN '${purchasedProductIds}'
+			 RETURN p.id AS productId, COUNT(p) AS numPurchases
+			 ORDER BY numPurchases DESC`,
+					{ userId, purchasedProductIds }
+				);
+				const recommendedProductIds = new Set();
+				for (const record of similarUsersResult.records) {
+					recommendedProductIds.add(record.get("productId"));
+				}
+
+				// Return the recommended product IDs
+				return [...recommendedProductIds];
+			}).catch((err) => {
+				return err;
+			});
+
+		} catch (err) {
+			console.log(err);
+			return [];
+		}
+	}
 }
 
 module.exports = Order;
