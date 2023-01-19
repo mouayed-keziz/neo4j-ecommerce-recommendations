@@ -8,6 +8,8 @@ const neo4jUrl = process.env.NEO4J_URL;
 const neo4jUsername = process.env.NEO4J_USERNAME;
 const neo4jPassword = process.env.NEO4J_PASSWORD;
 
+console.table({ neo4jUrl, neo4jUsername, neo4jPassword })
+
 let driver = null;
 let session = null;
 

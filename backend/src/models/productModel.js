@@ -1,15 +1,15 @@
 const { RunQuery } = require("../db_connect");
+const { v4: uuidv4 } = require('uuid');
+
 
 class Product {
-  constructor(name, price, description, category) {
-    this.name = name;
-    this.price = price;
-    this.description = description;
-    this.category = category;
+  constructor(body) {
+    this.body = body
   }
 
   async save() {
-    const query = `CREATE (n:Product {id: apoc.create.uuid(), name: '${this.name}', price: ${this.price}, description: '${this.description}', category: '${this.category}'}) RETURN n`;
+    const keys = Object.keys(this.body)
+    const query = `CREATE (n:Product {id: "${uuidv4()}", ${keys.map(key => `${key}: '${this.body[key]}'`).join(', ')}}) RETURN n`;
     await RunQuery(query);
   }
 

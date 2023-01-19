@@ -22,17 +22,7 @@ const get_product_by_id = async (req, res) => {
 
 const create_product = async (req, res) => {
   try {
-    ["name", "price", "description", "category"].forEach((item) => {
-      if (!req.body[item]) {
-        throw new Error(`${item} is required`);
-      }
-    });
-    const product = new Product(
-      req.body.name,
-      req.body.price,
-      req.body.description,
-      req.body.categories
-    );
+    const product = new Product(req.body);
     await product
       .save()
       .then(() => {

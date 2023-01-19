@@ -1,4 +1,5 @@
 const { RunQuery } = require("../db_connect");
+const { v4: uuidv4 } = require('uuid');
 const bcrypt = require("bcrypt");
 
 class User {
@@ -14,7 +15,7 @@ class User {
 		if (result.records.length > 0) {
 			throw new Error(`A user with the email ${this.email} already exists`);
 		}
-		const createQuery = `CREATE (n:User {id: apoc.create.uuid(), email: '${this.email}', password: '${this.password}'}) RETURN n`;
+		const createQuery = `CREATE (n:User {id: "${uuidv4()}", email: '${this.email}', password: '${this.password}'}) RETURN n`;
 		await RunQuery(createQuery);
 	}
 

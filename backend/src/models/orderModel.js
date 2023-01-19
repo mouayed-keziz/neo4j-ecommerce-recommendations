@@ -1,5 +1,5 @@
 const { RunQuery } = require("../db_connect");
-
+const { v4: uuidv4 } = require('uuid');
 class Order {
 	constructor(userId) {
 		this.userId = userId;
@@ -9,7 +9,7 @@ class Order {
 		const query1 = `
 		MATCH (u:User {id: '${this.userId}'})-[r:HAS_IN_CART]->(p:Product)
 		WITH collect(p) as products, u
-		CREATE (o:Order {id: apoc.create.uuid(), date: datetime()})
+		CREATE (o:Order {id: "${uuidv4()}", date: datetime()})
 		CREATE (u)-[:PLACED_ORDER]->(o)
 		FOREACH (product IN products | CREATE (o)-[:INCLUDES]->(product))
 		RETURN o`;
