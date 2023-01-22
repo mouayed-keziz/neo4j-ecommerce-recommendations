@@ -15,19 +15,18 @@ export default function HeroHeader() {
                             <span className={classes.highlight}>Digital-easy</span><br />Ecommerce Website
                         </Title>
                         <Text color="dimmed" mt="md">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur dolor ratione aliquid laudantium, quam harum reiciendis magni,
-                            repellendus eaque voluptatum quas similique ullam atque labore eius veritatis dolorum cupiditate eum.
+                            Découvrez notre site e-commerce exclusif de vente de produits informatiques, utilisant une base de données neo4j avancée pour générer des recommandations personnalisées pour chaque client
                         </Text>
 
                         <Group mt={30}>
                             <Button radius="xl" size="md" className={classes.control}>
-                                Lorem
+                                REACT
                             </Button>
                             <Button variant="light" radius="xl" size="md" className={classes.control}>
-                                ipsum
+                                NODE JS
                             </Button>
                             <Button variant="outline" radius="xl" size="md" className={classes.control}>
-                                dolor
+                                NEO4J
                             </Button>
                         </Group>
                     </div>

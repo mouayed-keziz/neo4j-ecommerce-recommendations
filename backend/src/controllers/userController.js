@@ -8,7 +8,7 @@ const login_user = async (req, res) => {
 		if (!user) throw new Error("Invalid email or password");
 		const valid = await bcrypt.compare(password, user.properties.password);
 		if (!valid) throw new Error("Invalid email or password");
-		res.send("login successful");
+		res.send({ email: user.properties.email, id: user.properties.id });
 	} catch (error) {
 		res.status(500).send(error.message);
 	}
@@ -83,6 +83,20 @@ const add_to_cart = async (req, res) => {
 	}
 };
 
+const get_card_by_user_id = async (req, res) => {
+	const products = User.get_products_incart(req.params.id).then((products) => {
+		let new_products = products.map((product) => {
+			return {
+				id: product.properties.id,
+				...product.properties
+			}
+		});
+		res.send(new_products);
+	}).catch((error) => {
+		res.status(500).send(error.message);
+	});
+}
+
 
 module.exports = {
 	login_user,
@@ -91,5 +105,6 @@ module.exports = {
 	get_one_user,
 	update_user,
 	delete_user,
-	add_to_cart
+	add_to_cart,
+	get_card_by_user_id
 };

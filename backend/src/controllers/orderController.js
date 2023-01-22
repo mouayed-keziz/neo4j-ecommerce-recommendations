@@ -23,6 +23,7 @@ const get_order_by_id = async (req, res) => {
 
 const create_order = async (req, res) => {
 	const { userId } = req.body;
+	console.table({ userId });
 	const order = new Order(userId);
 	order.save(userId).then((result) => {
 		res.send(result);

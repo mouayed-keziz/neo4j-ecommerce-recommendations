@@ -3,14 +3,25 @@ import { Title, Box, Group, Button } from '@mantine/core';
 import { useMediaQuery, useToggle } from '@mantine/hooks';
 import ProductCard from './ProductCard';
 import ProductCardSkeleton from './ProductCardSkeleton';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const ProductsCarousel = () => {
 
+    const [products, setProducts] = useState(null);
+    const fetchProducts = async () => {
+        const result = await axios.get("http://localhost:5000/products/some/15");
+        setProducts(result.data);
+        console.log(products)
+    };
+
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+
+
     const is_sm = useMediaQuery('(min-width: 768px)');
 
-    const products = [0, 0, 0, 0, 0, 0, 0, 0];
-    const [useSkeletons, toggleState] = useToggle();
-    const [selectedImage, toggleImage] = useToggle();
 
     return (
         <Box sx={(theme) => ({
@@ -24,8 +35,6 @@ const ProductsCarousel = () => {
         })}>
             <Group mb={20}>
                 <Title ml={10} order={2}>Section 1</Title>
-                <Button onClick={() => toggleState()}>state</Button>
-                <Button onClick={() => toggleImage()}>image</Button>
             </Group>
             <Carousel
                 withControls={is_sm}
@@ -40,11 +49,20 @@ const ProductsCarousel = () => {
                 ]}
                 align={is_sm ? 'start' : 'center'}
             >
-                {products.map((_, index) => (
-                    <Carousel.Slide key={index}>
-                        {useSkeletons ? < ProductCardSkeleton /> : <ProductCard selectedImage={selectedImage} />}
-                    </Carousel.Slide>
-                ))}
+
+                {products ? (
+                    products.map((element, index) => (
+                        <Carousel.Slide key={index}>
+                            <ProductCard index={index} data={element} />
+                        </Carousel.Slide>
+                    ))
+                ) : (
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((_, index) => (
+                        <Carousel.Slide key={index}>
+                            < ProductCardSkeleton />
+                        </Carousel.Slide>
+                    ))
+                )}
             </Carousel>
         </Box>
     );

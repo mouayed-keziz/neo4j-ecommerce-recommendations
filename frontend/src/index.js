@@ -24,7 +24,7 @@ function Application() {
 
   return (
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-      <MantineProvider theme={{ colorScheme: "dark", primaryColor: "violet" }} withGlobalStyles withNormalizeCSS>
+      <MantineProvider theme={{ colorScheme: colorScheme, primaryColor: "violet" }} withGlobalStyles withNormalizeCSS>
         <AuthContextProvider>
           <App />
         </AuthContextProvider>

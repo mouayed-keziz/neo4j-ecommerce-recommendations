@@ -1,5 +1,6 @@
-import { Container } from "@mantine/core";
+import { Button, Container, Group, Text } from "@mantine/core";
 import { FeaturesSection, HeroHeader, ProductsCarousel, ProductsGrid } from "../components/_index";
+import { useState } from "react";
 
 const HomePage = () => {
 
@@ -7,7 +8,7 @@ const HomePage = () => {
         <Container size={"xl"} p={0}>
             <HeroHeader />
             <ProductsCarousel />
-            <ProductsGrid ProductsNumber={8} />
+            <ProductsGrid useRecommandation={false} ProductsNumber={8} />
             <FeaturesSection
                 title="lorem ipsum dolor sit amet consectetur"
                 description="lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."

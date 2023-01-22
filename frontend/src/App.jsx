@@ -36,26 +36,14 @@ function App() {
 
   return (
     <>
-      {currentUser &&
-        <Center my={"md"}><Group>
-          <Text>you are logged in</Text>
-          <Button variant="outline"
-            onClick={(e) => {
-              e.preventDefault();
-              dispatch({ type: "LOGOUT" });
-            }}>
-            log out
-          </Button>
-        </Group></Center>}
-
       <Router>
         <ScrollToTop />
         <ConditionalNavBar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="product" element={<ProductPage />} />
+          <Route path="product/:id" element={<ProductPage />} />
           <Route path="authentication" element={<RequireNoAuth><LoginPage /></RequireNoAuth>} />
-          <Route path="cart" element={<CartPage />} />
+          <Route path="cart" element={<RequireAuth><CartPage /></RequireAuth>} />
           <Route path="search" element={<SearchPage />} />
           <Route path="settings" element={<RequireAuth><SettingsPage /></RequireAuth>} >
             <Route path="change-profile-info" element={<ProfileInfoSettings />} />
