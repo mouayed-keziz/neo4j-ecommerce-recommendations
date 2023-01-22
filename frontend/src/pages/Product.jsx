@@ -28,7 +28,7 @@ const ProductPage = () => {
             {product ? (
                 <ProductDetails data={product} />) : (<ProductDetailsSkeleton />)}
             <Box mt={70} m={0} p={0}>
-                <ProductsGrid useRecommandation={true} ProductsNumber={4} />
+                <ProductsGrid text="RECOMMANDATIONS 2" useRecommandation={true} ProductsNumber={4} />
             </Box>
         </Container>
     );

@@ -187,4 +187,11 @@ function getProducts() {
 	});
 }
 
-axios.post("http://localhost:5000/products/", products[0]);
+//save products to json
+const fs = require("fs");
+fs.writeFile("products2.json", JSON.stringify(products), (err) => {
+	if (err) {
+		console.log(err);
+	}
+}
+);

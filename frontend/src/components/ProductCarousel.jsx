@@ -34,7 +34,7 @@ const ProductsCarousel = () => {
             marginBottom: theme.spacing.xl * 3,
         })}>
             <Group mb={20}>
-                <Title ml={10} order={2}>Section 1</Title>
+                <Title ml={10} order={2}>RECOMMANDATIONS 1</Title>
             </Group>
             <Carousel
                 withControls={is_sm}

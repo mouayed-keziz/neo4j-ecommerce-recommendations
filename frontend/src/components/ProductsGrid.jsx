@@ -6,7 +6,7 @@ import ProductCardSkeleton from "./ProductCardSkeleton";
 import axios from "axios"
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-const ProductsGrid = ({ ProductsNumber, useRecommandation }) => {
+const ProductsGrid = ({ text, ProductsNumber, useRecommandation }) => {
 
     const [products, setProducts] = useState(null);
     const { currentUser } = useContext(AuthContext)
@@ -33,7 +33,7 @@ const ProductsGrid = ({ ProductsNumber, useRecommandation }) => {
             marginBottom: theme.spacing.xl * 3,
         })}>
             <Group mb={20}>
-                <Title ml={10} order={2}>Section 2</Title>
+                <Title ml={10} order={2}>{text}</Title>
             </Group>
             {products ? (
                 <Grid gutter={5} m={0} p={0}>

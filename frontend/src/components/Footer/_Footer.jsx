@@ -31,7 +31,7 @@ export default function Footer() {
                         <img width={"100px"} height={"100px"} src={logosvg} alt="logo" />
                     </Anchor>
                     <Text size="xs" color="dimmed" className={classes.description}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        PROJET BDD , encadré par : M.Mohamed Essaid KHANOUCHE
                     </Text>
                 </div>
                 <div className={classes.groups}>{groups}</div>

@@ -4,39 +4,34 @@ import { IconGauge, IconCookie, IconUser, IconMessage, IconMessage2, IconLock } 
 export const MOCKDATA = [
     {
         icon: IconGauge,
-        title: 'Extreme performance',
+        title: 'Neo4j :',
         description:
-            "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+            `Est un système de gestion de base de données graphique open source qui permet de stocker, gérer et interroger des données sous forme de graphes.`,
     },
     {
         icon: IconUser,
-        title: 'Privacy focused',
-        description:
-            "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+        title: 'Express :',
+        description: `Est un framework Node.js pour la création d'applications web et API. Il fournit une interface pour gérer les routes et les requêtes HTTP, facilite la gestion des sessions et des cookies, et permet l'intégration de middlewares pour ajouter des fonctionnalités supplémentaires.`,
     },
     {
         icon: IconCookie,
-        title: 'No third parties',
-        description:
-            "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+        title: 'React :',
+        description: `Est une bibliothèque JavaScript open source pour la création d'interfaces utilisateur. Il permet de construire des applications web en utilisant des composants réutilisables et offre des fonctionnalités telles que la gestion de l'état et la mise à jour en temps réel de l'interface utilisateur.`,
     },
     {
         icon: IconLock,
-        title: 'Secure by default',
-        description:
-            "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+        title: 'Node.js :',
+        description: `Est un environnement d'exécution JavaScript open source qui permet de créer des applications côté serveur en utilisant JavaScript. Il permet d'utiliser des bibliothèques JavaScript pour l'accès aux fichiers, la gestion des bases de données et la communication réseau.`,
     },
     {
         icon: IconMessage2,
-        title: '24/7 Support',
-        description:
-            "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+        title: 'Emotion :',
+        description: `Est une bibliothèque JavaScript pour la gestion des styles CSS dans les applications React. Il permet de définir des styles en utilisant des composants JSX et de les gérer de manière dynamique en fonction de l'état de l'application.`,
     },
     {
         icon: IconMessage,
-        title: 'messages',
-        description:
-            "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+        title: 'Axios :',
+        description: `Est une bibliothèque JavaScript pour les requêtes HTTP. Il permet de gérer les requêtes et les réponses de manière asynchrone et de gérer les erreurs. Il peut être utilisé pour les communications avec des API REST.`,
     },
 ];
 

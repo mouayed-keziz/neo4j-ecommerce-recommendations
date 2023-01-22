@@ -41,11 +41,11 @@ export default function NavBar() {
                         <Group>
                             {currentUser ? (
                                 <>
-                                    <Button onClick={() => { dispatch({ type: "LOGOUT" }) }} variant="outline" color="red" iconRight={<IconLogout />}>Log out</Button>
+                                    <Button onClick={() => { dispatch({ type: "LOGOUT" }) }} variant="outline" color="red" rightIcon={<IconLogout />}>Log out</Button>
                                 </>
                             ) : (
                                 <>
-                                    <Button onClick={() => { navigate("/authentication") }} variant="outline" color="blue" iconRight={<IconLogin />}>LOGIN</Button>
+                                    <Button onClick={() => { navigate("/authentication") }} variant="outline" color="blue" rightIcon={<IconLogin />}>LOGIN</Button>
                                 </>
                             )}
                             <Button onClick={() => navigate("/cart")} leftIcon={<IconShoppingCart />} >CART</Button>
@@ -66,17 +66,6 @@ export default function NavBar() {
                     </Drawer>
                 </Group>
             </Container >
-            <Container>
-                <Tabs defaultValue="Home" variant="outline" classNames={{ root: classes.tabs, tabsList: classes.tabsList, tab: classes.tab, }}>
-                    <Tabs.List position="center">
-                        {tabs.map((tab) => (
-                            <Tabs.Tab value={tab} key={tab}>
-                                {tab}
-                            </Tabs.Tab>
-                        ))}
-                    </Tabs.List>
-                </Tabs>
-            </Container>
         </div >
     );
 }   

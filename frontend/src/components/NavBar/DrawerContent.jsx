@@ -16,9 +16,9 @@ export default function DrawerContent(props) {
             <div>
                 <Container className={classes.linksContainer} >
                     {currentUser ? (
-                        <Button onClick={() => { dispatch({ type: "LOGOUT" }); props.toggledrawer() }} fullWidth variant="outline" color="red" size="lg" iconRight={<IconLogout />}>Log out</Button>
+                        <Button onClick={() => { dispatch({ type: "LOGOUT" }); props.toggledrawer() }} fullWidth variant="outline" color="red" size="lg" rightIcon={<IconLogout />}>Log out</Button>
                     ) : (
-                        <Button onClick={() => { navigate("/authentication"); props.toggledrawer() }} fullWidth variant="outline" color="blue" size="lg" iconRight={<IconLogin />}>LOGIN</Button>
+                        <Button onClick={() => { navigate("/authentication"); props.toggledrawer() }} fullWidth variant="outline" color="blue" size="lg" rightIcon={<IconLogin />}>LOGIN</Button>
                     )}
                     <Button onClick={() => navigate("/cart")} leftIcon={<IconShoppingCart />} >CART</Button>
                 </Container>
